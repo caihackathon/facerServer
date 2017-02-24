@@ -22,7 +22,7 @@ import javax.sql.DataSource;
  * represents a JDBC connection.
  * @author www.codejava.net
  */
-@WebServlet("/listUsers")
+@WebServlet("/listAlerts")
 public class UsersListServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
  
@@ -36,13 +36,16 @@ public class UsersListServlet extends HttpServlet {
             Connection conn = ds.getConnection();
              
             Statement statement = conn.createStatement();
-            String sql = "select email_id,system from facer.EMAIL";
+            String sql = "select email_id,system, email_type_cde from facer.EMAIL";
             ResultSet rs = statement.executeQuery(sql);
              
             int count = 1;
             while (rs.next()) {
                 writer.println(String.format("User #%d: %-15s %s", count++,
-                        rs.getString("email_id"), rs.getString("system")));
+                        rs.getString("email_id")
+                      , rs.getString("system")
+                      , rs.getString("email_type_cde")
+                      ));
                  
             }
         } catch (NamingException ex) {
