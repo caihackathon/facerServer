@@ -36,7 +36,7 @@ public class UsersListServlet extends HttpServlet {
             Connection conn = ds.getConnection();
              
             Statement statement = conn.createStatement();
-            String sql = "select email_id,system, email_type_cde from facer.EMAIL";
+            String sql = "select email_id,system, email_type_cde, email_from from facer.EMAIL";
             ResultSet rs = statement.executeQuery(sql);
              
             int count = 1;
@@ -45,6 +45,7 @@ public class UsersListServlet extends HttpServlet {
                         rs.getString("email_id")
                       , rs.getString("system")
                       , rs.getString("email_type_cde")
+                      , rs.getString("email_from")
                       ));
                  
             }
