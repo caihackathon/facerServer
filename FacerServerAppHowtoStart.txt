@@ -1,0 +1,78 @@
+Prequisites
+--==========================================================================================================================
+Install all necessary software. There is a wiki for that.
+
+Read about:
+MySQL
+Git - Git commands
+Maven - Maven build commands
+JPA/Hiberante
+JSON
+Jersey
+Jackson
+Tomcat
+
+Project 
+--==========================================================================================================================
+Project Name:        FacerServerApp
+Project URL:         QA: http://dr21apl53:8080/facerServer/webapi/applications/ 
+                     Local: http://localhost:8080/facerServer/webapi/applications/	
+Project Type:        Web Dynamic Project
+Project Build Type:  Maven 
+Project War:         FacerServerApp.war   
+
+Go to your workspace 
+
+Get Project from github:                 https://github.com/caihackathon/facerServer/tree/FacerServerApp
+
+Start Eclipse
+
+Import Exiting Maven Project
+
+Deployment Secriptor:  Default
+JAX-WS Web Services:   Default
+Jav Resources:
+    	src\main\java 	                  C:\home\workspace\FacerServerApp\src\main\java\
+            facerserver                   C:\home\workspace\FacerServerApp\src\main\java\facerserver
+		FacerResource.java        C:\home\workspace\FacerServerApp\src\main\java\facerserver\FacerResource.java
+            facerserver.dao               C:\home\workspace\FacerServerApp\src\main\java\facerserver\dao
+		ApplicationStatus.java    C:\home\workspace\FacerServerApp\src\main\java\facerserver\daoApplicationStatus.java
+		ApplicationStatusDAO.java C:\home\workspace\FacerServerApp\src\main\java\facerserver\daoApplicationStatusDAO.java
+		SessionUtil.java          C:\home\workspace\FacerServerApp\src\main\java\facerserver\daoSessionUtil.java
+	src\main\resources
+		hibernate.cfg.xml
+	src\test\java
+		TBD
+	Libraries
+		Path to libraries added in properties
+		or Maven pom file
+JavaScript Resources:	Default
+Referenced Libraries:
+			pom.xml          C:\home\workspace\FacerServerApp\pom.xml
+Deployed Resources:
+	webapp                           C:\home\workspace\FacerServerApp\src\main\webapp\   
+		WEB-INF                  C:\home\workspace\FacerServerApp\src\main\webapp\WEB-INF    
+                    web.xml		 C:\home\workspace\FacerServerApp\src\main\webapp\WEB-INF\web.xml
+  	web-resources
+		    pom.xml
+	RemoteSystemsTempFiles: Default
+src                                      C:\home\workspace\FacerServerApp\src
+target                                   C:\home\workspace\FacerServerApp\target
+FacerServerApp.war			 C:\home\workspace\FacerServerApp\target\FacerServerApp.war
+
+How To Start
+--==========================================================================================================================
+
+1) Customize pom.xml
+2) Customize hibernate.cfg.xml
+3) Customize web.xml
+4) Choose table/tables for your task
+5) Create entity(getters/setters) clas/clasess - facerserver.dao package
+6) Design get,post,put,delete methods for your entity clasess
+7) Create DAO clas/clasess - facerserver.dao package
+8) Modify FacerResource.java clas facerserver package 
+	add URI <mywebservice> to FacerResource.java - this action will publish your method  from DAO class as Web Service
+10)Run as - maven build install
+11)Run as - Run on the server
+12)Go url : http://localhost:8080/facerServer/webapi/<mywebservice>/	
+
