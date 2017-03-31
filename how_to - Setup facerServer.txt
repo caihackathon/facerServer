@@ -1,0 +1,341 @@
+# =============================================
+# Prerequisites
+# =============================================
+Java
+- JDK 8 installed (Select different locations for JDK & JRE)
+- JAVA_HOME set
+- JRE_HOME set
+
+Tomcat
+- Tomcat 8/8.5/9 installed
+- Set CATALINA_HOME=(tomcat dir)
+
+Maven
+- Maven installed
+- MAVEN_HOME set
+- Added to PATH - (maven dir)/bin
+
+
+# Verify pre-reqs
+Open command-line window:
+
+> set
+
+	Check variables shown for:
+		JAVA_HOME
+		JRE_HOME
+		MAVEN_HOME
+		CATALINA_HOME
+
+> path
+
+	Check path for:
+		%MAVEN_HOME%/bin
+		%JDK_HOME%/bin
+
+> mvn -version
+
+	Shows version of Maven installed
+
+> java -version
+
+	Shows version of Java installed
+
+# =============================================
+# Create Maven Project
+# =============================================
+
+# Start in Eclipse workspace
+cd workspace
+
+mvn archetype:generate -DinteractiveMode=false -Dpackage=com.facerServer.rest -DgroupId=com.facerServer.rest -DartifactId=facerServer -DarchetypeArtifactId=jersey-quickstart-webapp -DarchetypeGroupId=org.glassfish.jersey.archetypes -DarchetypeVersion=2.25.1
+
+# =============================================
+# Verify files
+# =============================================
+
+In project folder, verify files exist:
+
+	facerServer\pom.xml
+
+	facerServer\src\main\webapp\WEB-INF\web.xml
+
+	facerServer\src\main\webapp\index.jsp
+
+	facerServer\src\main\java\com\facerServer\MyResource.java
+
+Make changes to these files:
+
+	facerServer\pom.xml
+
+		From:
+                    <source>1.7</source>
+                    <target>1.7</target>
+
+		To:
+                    <source>1.8</source>
+                    <target>1.8</target>
+
+# =============================================
+# Maven - Build
+# =============================================
+
+cd facerServer
+
+mvn clean install
+
+
+
+In project folder, verify .war file was created:
+
+	facerServer\target\facerServer.war
+
+# =============================================
+# Deploy to Tomcat 
+#  -- May need to update directories below 
+#  -- Commands below can be saved as a batch file to do future deployments
+#  --    When running as a batch file, run it twice.  First to stop Tomcat, then to deploy and start Tomcat
+# =============================================
+
+set PROJECT_NAME=facerServer
+set CATALINA_HOME=C:\apache-tomcat-9.0.0.M18
+set BUILD_TARGET=C:\Workspace\%PROJECT_NAME%\target\%PROJECT_NAME%.war
+
+wmic process list | findstr /V findstr | findstr /I catalina
+if %ERRORLEVEL%==1 goto :stopped
+
+REM Stop Tomcat
+%CATALINA_HOME%\bin\shutdown.bat
+
+:stopped
+REM cleanup
+del /S /F /Q %CATALINA_HOME%\temp
+rmdir /s /q %CATALINA_HOME%\temp
+
+del /S /F /Q %CATALINA_HOME%\work
+rmdir /s /q %CATALINA_HOME%\work
+
+del /F /Q %CATALINA_HOME%\webapps\%PROJECT_NAME%.war
+del /S /F /Q %CATALINA_HOME%\webapps\%PROJECT_NAME%
+rmdir /s /q %CATALINA_HOME%\webapps\%PROJECT_NAME%
+
+REM Deploy .war file
+copy %BUILD_TARGET% %CATALINA_HOME%\webapps
+
+REM Start Tomcat
+%CATALINA_HOME%\bin\startup.bat
+
+pause
+
+# =============================================
+# Test
+# =============================================
+
+In web browser:
+
+	# Comfirm Tomcat is running
+	http://localhost:8080
+
+		> Tomcat page
+
+	# Comfirm app was deployed
+	http://localhost:8080/facerServer
+
+		> Jersey RESTful Web Application!
+
+	# Comfirm app was deployed
+	http://localhost:8080/facerServer/webapi/myresource
+
+		> Got it!
+
+
+# =============================================
+# Convert to Eclipse project
+# =============================================
+
+cd facerServer
+
+mvn eclipse:eclipse -Dwtpversion=2.0
+
+
+# =============================================
+# Import project into Eclipse
+# =============================================
+
+File > Import > Existing Maven Projects > Browse...
+
+	(Select workspace folder)/(Project folder)
+
+# =============================================
+# Check project Build Path for any errors:
+# =============================================
+
+	Delete M2_REPO jars (should all be under Maven Dependencies)
+	
+	Java Build Patch > Libraries > Add Library
+	
+		Server Runtime > Apache Tomcat 9.0
+		
+		
+	Project Facets (Check version and change if necessary.  Apply after each change)
+	
+		Dynamic Web Module > 3.1	
+		
+		Java > 1.8
+
+		Javascript > 1.0
+		
+		JAX-RS (Rest Web Services) > 2.0		
+		
+		JPA > 2.1
+		
+			(Further configuration required...)
+			
+				Platform:	Generic
+
+				JPA Implementation:	Disable library configuration
+
+				Connection
+				
+					(Add connection...)
+					
+						Connection Profile Types:  MySQL
+						
+						Name: facerServerDB
+						
+						Properties:
+						
+							Database:	facer
+							
+							URL:		jdbc:mysql://localhost:3306/facer
+							
+							User name:	<user>
+							
+							Password:	<password>
+							
+							[x] Save password
+							
+							(Test Connection) > (Finish)
+				
+# =============================================
+# Add dependencies to pom.xml
+# =============================================
+
+Change:
+
+	From:
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.5.1</version>
+
+	To:
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.5.1</version>
+
+
+Add:
+	<!-- Hibernate -->
+  	<dependency>
+  		<groupId>org.hibernate</groupId>
+  		<artifactId>hibernate-core</artifactId>
+  		<version>5.2.9.Final</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.hibernate</groupId>
+  		<artifactId>hibernate-entitymanager</artifactId>
+  		<version>5.2.9.Final</version>
+  	</dependency>
+
+	<!-- MySQL -->
+  	<dependency>
+  		<groupId>mysql</groupId>
+  		<artifactId>mysql-connector-java</artifactId>
+  		<version>5.1.41</version>
+  	</dependency>
+
+        <!-- uncomment this to get JSON support -->
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-moxy</artifactId>
+        </dependency>
+
+
+# =============================================
+# Modify web.xml
+# =============================================
+
+Add or update web.xml.  Leave servlet entries alone.
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xmlns="http://xmlns.jcp.org/xml/ns/javaee" 
+		xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" 
+		id="WebApp_ID" version="3.1">
+	<display-name>facerServer</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+
+
+# =============================================
+# Build and deploy
+#   (Create deploy.bat file in project folder)
+# =============================================
+
+cd facerServer
+
+	mvn clean install
+
+	deploy.bat
+
+
+# =============================================
+# Create database entity classes
+# =============================================
+
+Right-click on the Eclipse project > JPA Tools > Generate Entities from Tables
+
+	Establish database connection
+
+	Select facer tables > Next > Next
+
+	Customize Defaults:
+
+		Key generator:	auto
+
+		Package: com.facerServer.model	
+
+Expand "JPA Content" in Eclipse
+
+
+# =============================================
+# Persistence setup - persistence.xml
+# =============================================
+
+Persistence provider:
+	org.hibernate.jpa.HibernatePersistenceProvider
+
+
+# =============================================
+# Create dao classes
+# =============================================
+
+Create package under src/main/java  --  com.facerServer.dao
+
+Create new class:
+
+	ApplicationDao
+
+	
+# =============================================
+# Tst using command-line 
+# =============================================
+
+Create package under src/main/java  --  com.facerServer.cmd
+
+Create new class:
+
+	Main
+
+	
