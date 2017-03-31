@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="facerServer" transaction-type="RESOURCE_LOCAL">
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+		<class>com.facerServer.model.Incident</class>
+		<class>com.facerServer.model.StdApplication</class>
+		<class>com.facerServer.model.StdComponent</class>
+		<class>com.facerServer.model.StdIncidentType</class>
+		<class>com.facerServer.model.StdSeverity</class>
+		<class>com.facerServer.model.StdStatus</class>
+		<class>com.facerServer.model.UserLogin</class>
+		<class>com.facerServer.model.IncidentVw</class>
+		<properties>
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://dr21apl53.cityofchicago.org:8443/facer"/>
+			<property name="javax.persistence.jdbc.user" value="gregg"/>
+			<property name="javax.persistence.jdbc.password" value="N6#wn9aMtUEq3zmNqlVs"/>
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+		</properties>
+	</persistence-unit>
+</persistence>
