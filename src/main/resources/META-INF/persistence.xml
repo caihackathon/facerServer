@@ -9,7 +9,6 @@
 		<class>com.facerServer.model.StdSeverity</class>
 		<class>com.facerServer.model.StdStatus</class>
 		<class>com.facerServer.model.UserLogin</class>
-		<class>com.facerServer.model.IncidentVw</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://dr21apl53.cityofchicago.org:8443/facer"/>
 			<property name="javax.persistence.jdbc.user" value="gregg"/>
