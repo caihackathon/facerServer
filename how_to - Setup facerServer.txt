@@ -144,9 +144,17 @@ In web browser:
 		> Jersey RESTful Web Application!
 
 	# Comfirm app was deployed
-	http://localhost:8080/facerServer/webapi/myresource
+	http://localhost:8080/facerServer/webapi/example
 
-		> Got it!
+		(Text list of applications displayed)
+
+	http://localhost:8080/facerServer/webapi/example/html
+
+		(HTML list of applications displayed)
+
+	http://localhost:8080/facerServer/webapi/example/html
+
+		(HTML list of applications displayed)
 
 
 # =============================================
@@ -338,4 +346,4 @@ Create new class:
 
 	Main
 
-	
+	a
