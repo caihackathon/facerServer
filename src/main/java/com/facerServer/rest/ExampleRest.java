@@ -57,7 +57,7 @@ public class ExampleRest {
     public List<StdApplication> getList() throws Exception {
   
     	ApplicationDao appDao = new ApplicationDao();
-    	List<StdApplication> appList = appDao.readAll();
+    	List appList = appDao.readAll();
 
     	System.out.println("getList(): found " + appList.size() + " message(s) on DB");  	
     	
