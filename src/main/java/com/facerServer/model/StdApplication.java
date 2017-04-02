@@ -12,7 +12,10 @@ import java.util.List;
  */
 @Entity
 @Table(name="STD_APPLICATION")
-@NamedQuery(name="StdApplication.findAll", query="SELECT s FROM StdApplication s ORDER BY s.applicationName")
+@NamedQueries({
+	@NamedQuery(name="StdApplication.find", query="SELECT s FROM StdApplication s")
+,	@NamedQuery(name="StdApplication.findAll", query="SELECT s FROM StdApplication s ORDER BY s.applicationName")
+})
 public class StdApplication implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -41,36 +44,42 @@ public class StdApplication implements Serializable {
 		return this.applicationId;
 	}
 
-	public void setApplicationId(int applicationId) {
-		this.applicationId = applicationId;
-	}
-
 	public String getApplicationName() {
 		return this.applicationName;
+	}
+
+	public String getApplicationActive() {
+		String active = new String();
+		
+		if ( this.expireDate != null) {
+			active = "N";
+		} else {
+			active = "Y";
+		};
+
+		return active;
+	}
+
+	public List<StdComponent> getStdComponents() {
+		return this.stdComponents;
+	}
+
+	
+/*
+	public void setApplicationId(int applicationId) {
+		this.applicationId = applicationId;
 	}
 
 	public void setApplicationName(String applicationName) {
 		this.applicationName = applicationName;
 	}
 
-	public Timestamp getCreateDate() {
-		return this.createDate;
-	}
-
 	public void setCreateDate(Timestamp createDate) {
 		this.createDate = createDate;
 	}
 
-	public Timestamp getExpireDate() {
-		return this.expireDate;
-	}
-
 	public void setExpireDate(Timestamp expireDate) {
 		this.expireDate = expireDate;
-	}
-
-	public List<StdComponent> getStdComponents() {
-		return this.stdComponents;
 	}
 
 	public void setStdComponents(List<StdComponent> stdComponents) {
@@ -90,5 +99,6 @@ public class StdApplication implements Serializable {
 
 		return stdComponent;
 	}
+*/
 
 }

@@ -41,36 +41,37 @@ public class StdSeverity implements Serializable {
 		return this.severityId;
 	}
 
-	public void setSeverityId(int severityId) {
-		this.severityId = severityId;
-	}
-
-	public Timestamp getCreateDate() {
-		return this.createDate;
-	}
-
-	public void setCreateDate(Timestamp createDate) {
-		this.createDate = createDate;
-	}
-
 	public String getSeverityName() {
 		return this.severityName;
-	}
-
-	public void setSeverityName(String severityName) {
-		this.severityName = severityName;
 	}
 
 	public int getSortOrder() {
 		return this.sortOrder;
 	}
 
-	public void setSortOrder(int sortOrder) {
-		this.sortOrder = sortOrder;
-	}
-
 	public List<Incident> getIncidents() {
 		return this.incidents;
+	}
+	
+/*
+	public Timestamp getCreateDate() {
+		return this.createDate;
+	}
+
+	public void setSeverityId(int severityId) {
+		this.severityId = severityId;
+	}
+
+	public void setCreateDate(Timestamp createDate) {
+		this.createDate = createDate;
+	}
+
+	public void setSeverityName(String severityName) {
+		this.severityName = severityName;
+	}
+
+	public void setSortOrder(int sortOrder) {
+		this.sortOrder = sortOrder;
 	}
 
 	public void setIncidents(List<Incident> incidents) {
@@ -91,4 +92,6 @@ public class StdSeverity implements Serializable {
 		return incident;
 	}
 
+*/
+	
 }

@@ -17,13 +17,17 @@ if (apps != null) {
 <h3>Applications</h3>
 <table border="1" width="300">
 <tr>
-<td width="80"><b>ID</b></td>
-<td width="220"><b>Name</b></td>
+<td><b>ID</b></td>
+<td><b>Name</b></td>
+<td><b>Active</b></td>
+<td><b>Status</b></td>
 </tr>
 <%	for (StdApplication app : apps) { %>
 <tr>
 <td><%=app.getApplicationId()%></td>
 <td><%=app.getApplicationName()%></td>
+<td><%=app.getApplicationActive()%></td>
+<td> </td>
 </tr>
 <%   }
   }

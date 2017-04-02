@@ -20,7 +20,9 @@ public class ApplicationRest {
     public String getText() {
 
     	List<StdApplication> appList = new ArrayList<StdApplication>();
-    	appList = ApplicationDao.readAll();
+    	
+    	ApplicationDao dao = new ApplicationDao();
+    	appList = dao.readAll();
 
     	String msg = new String();    	
     	
@@ -41,7 +43,10 @@ public class ApplicationRest {
     	msg = "<html> " + "<title>" + "Applications" + "</title><body><h2>Applications</h2>";
 
     	List<StdApplication> appList = new ArrayList<StdApplication>();
-    	appList = ApplicationDao.readAll();
+
+    	ApplicationDao dao = new ApplicationDao();
+    	appList = dao.readAll();
+  	
     	for (StdApplication app : appList) {
     		msg = msg + app.getApplicationId() + " - " + app.getApplicationName() + "<br>"; 
     	}
@@ -51,28 +56,7 @@ public class ApplicationRest {
         return Response.status(200).entity(msg).build();
     }
 
-    @Path("jsontest")
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<StdApplication> getJSON() throws Exception {
-    	
-    	List<StdApplication> apps = new ArrayList<>();
-    	
-    	StdApplication a = new StdApplication();
-    	a.setApplicationId(1);
-    	a.setApplicationName("Test");
-    	apps.add(a);
-    	a.setApplicationId(2);
-    	a.setApplicationName("Test2");
-    	apps.add(a);    	
-    	a.setApplicationId(3);
-    	a.setApplicationName("Test3");
-    	apps.add(a);    	
-    	System.out.println("getJSON(): found " + apps.size() + " message(s) on DB");
-    	
-    	return apps;
-    }
-    
+/*
     @Path("json")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -97,6 +81,7 @@ public class ApplicationRest {
     	
     	return apps;
     }
+*/
     
     @Path("response")
     @GET
@@ -105,8 +90,9 @@ public class ApplicationRest {
     	
     	List<StdApplication> appList = new ArrayList<StdApplication>();
     	
-    	appList = ApplicationDao.readAll();
-    	
+    	ApplicationDao dao = new ApplicationDao();
+    	appList = dao.readAll();
+
     	System.out.println("getJSON(): found " + appList.size() + " message(s) on DB");
     	
     	return Response.status(200).entity(appList).build();

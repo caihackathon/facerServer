@@ -36,32 +36,34 @@ public class StdStatus implements Serializable {
 		return this.statusId;
 	}
 
-	public void setStatusId(int statusId) {
-		this.statusId = statusId;
-	}
-
-	public Timestamp getCreateDate() {
-		return this.createDate;
-	}
-
-	public void setCreateDate(Timestamp createDate) {
-		this.createDate = createDate;
+	public String getStatusName() {
+		return this.statusName;
 	}
 
 	public int getSortOrder() {
 		return this.sortOrder;
 	}
 
-	public void setSortOrder(int sortOrder) {
-		this.sortOrder = sortOrder;
+/*
+	public Timestamp getCreateDate() {
+		return this.createDate;
 	}
 
-	public String getStatusName() {
-		return this.statusName;
+	public void setStatusId(int statusId) {
+		this.statusId = statusId;
+	}
+
+	public void setCreateDate(Timestamp createDate) {
+		this.createDate = createDate;
+	}
+
+	public void setSortOrder(int sortOrder) {
+		this.sortOrder = sortOrder;
 	}
 
 	public void setStatusName(String statusName) {
 		this.statusName = statusName;
 	}
-
+*/
+	
 }

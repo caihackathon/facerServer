@@ -19,10 +19,15 @@ public class Main {
 		
 		System.out.println("=== Applications ===");
 
-		List<StdApplication> apps = ApplicationDao.readAll();
+    	ApplicationDao dao = new ApplicationDao();
+		
+		List<StdApplication> apps = dao.readAll();
 		if (apps != null) {
 			for (StdApplication app : apps) {
-				System.out.println(app.getApplicationName());
+				System.out.println(app.getApplicationId() 
+						+ " - " + app.getApplicationName()
+						+ " - " + app.getApplicationActive()
+						);
 			}
 		}
 
@@ -31,8 +36,10 @@ public class Main {
 		if (comps != null) {
 			for (StdComponent comp : comps ) {
 				System.out.println(comp.getComponentId()
-								+ " - " + comp.getComponentName()
-								+ " - " + comp.getStdApplication().getApplicationName() );
+							+ " - " + comp.getApplicationName()
+							+ " - " + comp.getComponentName()
+							+ " - " + comp.getComponentActive()
+							);
 			}
 		}
 		

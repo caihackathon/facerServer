@@ -46,36 +46,42 @@ public class StdIncidentType implements Serializable {
 		return this.incidentTypeId;
 	}
 
-	public void setIncidentTypeId(int incidentTypeId) {
-		this.incidentTypeId = incidentTypeId;
+	public String getIncidentTypeName() {
+		return this.incidentTypeName;
 	}
 
 	public String getAppendNewEventsFlg() {
 		return this.appendNewEventsFlg;
 	}
 
-	public void setAppendNewEventsFlg(String appendNewEventsFlg) {
-		this.appendNewEventsFlg = appendNewEventsFlg;
+	public List<Incident> getIncidents() {
+		return this.incidents;
 	}
 
+	public StdComponent getStdComponent() {
+		return this.stdComponent;
+	}
+
+
+/*
 	public Timestamp getCreateDate() {
 		return this.createDate;
+	}
+
+	public void setIncidentTypeId(int incidentTypeId) {
+		this.incidentTypeId = incidentTypeId;
+	}
+
+	public void setAppendNewEventsFlg(String appendNewEventsFlg) {
+		this.appendNewEventsFlg = appendNewEventsFlg;
 	}
 
 	public void setCreateDate(Timestamp createDate) {
 		this.createDate = createDate;
 	}
 
-	public String getIncidentTypeName() {
-		return this.incidentTypeName;
-	}
-
 	public void setIncidentTypeName(String incidentTypeName) {
 		this.incidentTypeName = incidentTypeName;
-	}
-
-	public List<Incident> getIncidents() {
-		return this.incidents;
 	}
 
 	public void setIncidents(List<Incident> incidents) {
@@ -96,12 +102,9 @@ public class StdIncidentType implements Serializable {
 		return incident;
 	}
 
-	public StdComponent getStdComponent() {
-		return this.stdComponent;
-	}
-
 	public void setStdComponent(StdComponent stdComponent) {
 		this.stdComponent = stdComponent;
 	}
+*/
 
 }

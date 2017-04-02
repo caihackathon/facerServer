@@ -12,7 +12,10 @@ import java.util.List;
  */
 @Entity
 @Table(name="STD_COMPONENT")
-@NamedQuery(name="StdComponent.findAll", query="SELECT s FROM StdComponent s")
+@NamedQueries({
+	@NamedQuery(name="StdComponent.find", query="SELECT c FROM StdComponent c")
+,	@NamedQuery(name="StdComponent.findAll", query="SELECT c FROM StdComponent c ORDER BY c.componentName")
+})
 public class StdComponent implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -46,44 +49,69 @@ public class StdComponent implements Serializable {
 		return this.componentId;
 	}
 
-	public void setComponentId(int componentId) {
-		this.componentId = componentId;
-	}
-
 	public String getComponentName() {
 		return this.componentName;
 	}
 
-	public void setComponentName(String componentName) {
-		this.componentName = componentName;
+	public int getApplicationId() {
+		return this.stdApplication.getApplicationId();
 	}
 
-	public Timestamp getCreateDate() {
-		return this.createDate;
-	}
-
-	public void setCreateDate(Timestamp createDate) {
-		this.createDate = createDate;
-	}
-
-	public Timestamp getExpireDate() {
-		return this.expireDate;
-	}
-
-	public void setExpireDate(Timestamp expireDate) {
-		this.expireDate = expireDate;
+	public String getApplicationName() {
+		return this.stdApplication.getApplicationName();
 	}
 
 	public StdApplication getStdApplication() {
 		return this.stdApplication;
 	}
 
-	public void setStdApplication(StdApplication stdApplication) {
-		this.stdApplication = stdApplication;
-	}
-
 	public List<StdIncidentType> getStdIncidentTypes() {
 		return this.stdIncidentTypes;
+	}
+
+	public String getComponentActive() {
+
+		String activeApp = this.stdApplication.getApplicationActive();
+		
+		String activeComp = new String();
+		
+		if ( activeApp == "Y" && this.expireDate == null ) {
+			activeComp = "Y";			
+		} else {
+			activeComp = "N";
+		};
+
+		return activeComp;
+	}
+
+
+/*
+	public Timestamp getCreateDate() {
+		return this.createDate;
+	}
+
+	public Timestamp getExpireDate() {
+		return this.expireDate;
+	}
+
+	public void setComponentId(int componentId) {
+		this.componentId = componentId;
+	}
+
+	public void setComponentName(String componentName) {
+		this.componentName = componentName;
+	}
+
+	public void setCreateDate(Timestamp createDate) {
+		this.createDate = createDate;
+	}
+
+	public void setExpireDate(Timestamp expireDate) {
+		this.expireDate = expireDate;
+	}
+
+	public void setStdApplication(StdApplication stdApplication) {
+		this.stdApplication = stdApplication;
 	}
 
 	public void setStdIncidentTypes(List<StdIncidentType> stdIncidentTypes) {
@@ -103,5 +131,7 @@ public class StdComponent implements Serializable {
 
 		return stdIncidentType;
 	}
+
+*/
 
 }
