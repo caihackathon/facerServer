@@ -1,7 +1,11 @@
 package com.facerServer.rest;
 
+import java.io.IOException;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -11,6 +15,9 @@ import javax.ws.rs.core.Response;
 
 import com.facerServer.dao.ApplicationDao;
 import com.facerServer.model.StdApplication;
+import com.fasterxml.jackson.databind.MapperFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 
 @Path("example")
 public class ExampleRest {
@@ -51,13 +58,40 @@ public class ExampleRest {
         return Response.status(200).entity(msg).build();
     }
 
+/*
+    @Path("om")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getOM() throws Exception {
+  
+    	ObjectMapper om = new ObjectMapper();
+    	
+    	String carJson = "{ \"brand\" : \"Mercedes\", \"doors\" : 5 }";
+   
+   // 		Car car = objectMapper.
+    	
+    	try {
+    		
+    	} catch (IOException e) {
+    		e.printStackTrace();
+    	}
+    	
+ //   	ApplicationDao appDao = new ApplicationDao();
+ //   	List appList = appDao.readAll();
+
+ //   	System.out.println("getList(): found " + appList.size() + " message(s) on DB");  	
+    	
+    	return Response.status(200).entity(om).build();;
+    }
+*/
+    
     @Path("list")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<StdApplication> getList() throws Exception {
   
     	ApplicationDao appDao = new ApplicationDao();
-    	List appList = appDao.readAll();
+    	List<StdApplication> appList = appDao.readAll();
 
     	System.out.println("getList(): found " + appList.size() + " message(s) on DB");  	
     	
@@ -70,12 +104,8 @@ public class ExampleRest {
     public Response getResponse() throws Exception {
     	
     	List<StdApplication> appList = new ArrayList<StdApplication>();
-    	
     	appList = ApplicationDao.readAll();
-    	
-    	System.out.println("getResponse(): found " + appList.size() + " message(s) on DB");
-    	
+    	System.out.println("getResponse(): found " + appList.size() + " message(s) on DB");    	
     	return Response.status(200).entity(appList).build();
     }
-
 }

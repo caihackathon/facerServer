@@ -1,0 +1,56 @@
+# How To - Test facerServer
+#    Assumes *nix commands will be used
+#    Similar windows command will be shown in square brackets -- [command]
+
+# =======================
+# Build 
+# =======================
+
+#  Prerequisites
+
+-- Check environment variables
+set | grep HOME
+
+	(Verify these are set)
+	CATALINA_HOME	(Tomcat install directory)
+	JAVA_HOME
+	MYSQL_HOME	(if running mySQL database)
+
+-- Do a fresh build
+
+cd <workspace>/facerServer
+
+mvn clean install
+ 
+-- Copy .war file to Tomcat
+
+ cp ./target/facerServer.war ${CATALINA_HOME}/webapps
+ [ copy ./target/facerServer.war %CATALINA_HOME%/webapps ]
+ 
+# =======================
+# Build 
+# =======================
+ 
+# Standalone Java program
+
+Run /src/main/java/com.facerServer.cmd/Main.java
+ 
+# Verify tomcat
+
+http://localhost:8080/
+
+#Verify .jsp 
+
+http://localhost:8080/facerServer
+(Click on each page)
+
+# Verify REST service calls
+
+http://localhost:8080/facerServer/rest/example					(Returns text listing of applications)
+
+http://localhost:8080/facerServer/rest/example/html				(Returns html listing of applications)
+
+http://localhost:8080/facerServer/rest/example/list				(Returns List)
+
+http://localhost:8080/facerServer/rest/example/response			(Returns Response with JSON)
+
