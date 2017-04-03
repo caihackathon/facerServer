@@ -21,13 +21,13 @@ public class StdApplication implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="APPLICATION_ID")
+	@Column(name="APPLICATION_ID", updatable = false, nullable = false)
 	private int applicationId;
 
-	@Column(name="APPLICATION_NAME")
+	@Column(name="APPLICATION_NAME", updatable = false, nullable = false)
 	private String applicationName;
 
-	@Column(name="CREATE_DATE")
+	@Column(name="CREATE_DATE", updatable = false, nullable = false)
 	private Timestamp createDate;
 
 	@Column(name="EXPIRE_DATE")

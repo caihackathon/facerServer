@@ -56,7 +56,7 @@ public class ApplicationDao {
 	// ==================================================
 	//     readAll - All Applications
 	// ==================================================
-	public List<StdApplication> readAll() {
+	public static List<StdApplication> readAll() {
 		
 		List<StdApplication> apps = null;
 		

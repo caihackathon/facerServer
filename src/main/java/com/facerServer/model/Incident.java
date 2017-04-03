@@ -20,20 +20,20 @@ public class Incident implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="INCIDENT_ID")
+	@Column(name="INCIDENT_ID", updatable = false, nullable = false)
 	private int incidentId;
 
-	@Column(name="CREATE_DATE")
-	private Timestamp createDate;
-
-	@Column(name="INCIDENT_DATE")
+	@Column(name="INCIDENT_DATE", updatable = false, nullable = false)
 	private Timestamp incidentDate;
+
+	@Column(name="INCIDENT_RESOLVED_DATE")
+	private Timestamp incidentResolvedDate;
 
 	@Column(name="INCIDENT_DETAIL")
 	private String incidentDetail;
 
-	@Column(name="INCIDENT_RESOLVED_DATE")
-	private Timestamp incidentResolvedDate;
+	@Column(name="CREATE_DATE", updatable = false, nullable = false)
+	private Timestamp createDate;
 
 	//bi-directional many-to-one association to StdIncidentType
 	@ManyToOne

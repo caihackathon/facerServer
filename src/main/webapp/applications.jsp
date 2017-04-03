@@ -11,7 +11,8 @@
 </head>
 <body>
 <% 
-List<StdApplication> apps = ApplicationDao.readAll();
+ApplicationDao dao = new ApplicationDao();
+List<StdApplication> apps = dao.readAll();
 if (apps != null) {
 %>
 <h3>Applications</h3>

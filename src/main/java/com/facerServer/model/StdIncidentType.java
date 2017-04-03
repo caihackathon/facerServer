@@ -18,17 +18,17 @@ public class StdIncidentType implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="INCIDENT_TYPE_ID")
+	@Column(name="INCIDENT_TYPE_ID", updatable = false, nullable = false)
 	private int incidentTypeId;
 
-	@Column(name="APPEND_NEW_EVENTS_FLG")
+	@Column(name="INCIDENT_TYPE_NAME", updatable = false, nullable = false)
+	private String incidentTypeName;
+
+	@Column(name="APPEND_NEW_EVENTS_FLG", nullable = false)
 	private String appendNewEventsFlg;
 
-	@Column(name="CREATE_DATE")
+	@Column(name="CREATE_DATE", updatable = false, nullable = false)
 	private Timestamp createDate;
-
-	@Column(name="INCIDENT_TYPE_NAME")
-	private String incidentTypeName;
 
 	//bi-directional many-to-one association to Incident
 	@OneToMany(mappedBy="stdIncidentType")

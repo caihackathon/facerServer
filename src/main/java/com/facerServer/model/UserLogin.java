@@ -17,35 +17,35 @@ public class UserLogin implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="USER_ID")
+	@Column(name="USER_ID", updatable = false, nullable = false)
 	private int userId;
 
-	@Column(name="CREATE_DATE")
-	private Timestamp createDate;
+	@Column(name="FIRST_NAME", nullable = false)
+	private String firstName;
 
-	@Column(name="EMAIL_ADDRESS")
+	@Column(name="LAST_NAME", nullable = false)
+	private String lastName;
+
+	@Column(name="EMAIL_ADDRESS", nullable = false)
 	private String emailAddress;
 
 	@Column(name="EXPIRE_DATE")
 	private Timestamp expireDate;
 
-	@Column(name="FIRST_NAME")
-	private String firstName;
-
-	@Column(name="LAST_NAME")
-	private String lastName;
-
-	@Column(name="NEXT_PASSWORD_RESET_DATE")
-	private Timestamp nextPasswordResetDate;
-
 	@Column(name="PASSWORD")
 	private byte[] password;
+
+	@Column(name="TOKEN")
+	private byte[] token;
 
 	@Column(name="RESET_PASSWORD_FLG")
 	private String resetPasswordFlg;
 
-	@Column(name="TOKEN")
-	private byte[] token;
+	@Column(name="NEXT_PASSWORD_RESET_DATE")
+	private Timestamp nextPasswordResetDate;
+
+	@Column(name="CREATE_DATE", updatable = false, nullable = false)
+	private Timestamp createDate;
 
 	public UserLogin() {
 	}

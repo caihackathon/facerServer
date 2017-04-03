@@ -22,13 +22,13 @@ public class StdComponent implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="COMPONENT_ID")
+	@Column(name="COMPONENT_ID", updatable = false, nullable = false)
 	private int componentId;
 
-	@Column(name="COMPONENT_NAME")
+	@Column(name="COMPONENT_NAME", updatable = false, nullable = false)
 	private String componentName;
 
-	@Column(name="CREATE_DATE")
+	@Column(name="CREATE_DATE", updatable = false, nullable = false)
 	private Timestamp createDate;
 
 	@Column(name="EXPIRE_DATE")

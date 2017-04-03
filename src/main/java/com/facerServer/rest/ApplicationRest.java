@@ -21,8 +21,7 @@ public class ApplicationRest {
 
     	List<StdApplication> appList = new ArrayList<StdApplication>();
     	
-    	ApplicationDao dao = new ApplicationDao();
-    	appList = dao.readAll();
+    	appList = ApplicationDao.readAll();
 
     	String msg = new String();    	
     	
@@ -44,8 +43,7 @@ public class ApplicationRest {
 
     	List<StdApplication> appList = new ArrayList<StdApplication>();
 
-    	ApplicationDao dao = new ApplicationDao();
-    	appList = dao.readAll();
+    	appList = ApplicationDao.readAll();
   	
     	for (StdApplication app : appList) {
     		msg = msg + app.getApplicationId() + " - " + app.getApplicationName() + "<br>"; 
@@ -90,8 +88,7 @@ public class ApplicationRest {
     	
     	List<StdApplication> appList = new ArrayList<StdApplication>();
     	
-    	ApplicationDao dao = new ApplicationDao();
-    	appList = dao.readAll();
+    	appList = ApplicationDao.readAll();
 
     	System.out.println("getJSON(): found " + appList.size() + " message(s) on DB");
     	

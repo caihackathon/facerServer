@@ -18,17 +18,17 @@ public class StdSeverity implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="SEVERITY_ID")
+	@Column(name="SEVERITY_ID", updatable = false, nullable = false)
 	private int severityId;
 
-	@Column(name="CREATE_DATE")
-	private Timestamp createDate;
-
-	@Column(name="SEVERITY_NAME")
+	@Column(name="SEVERITY_NAME", updatable = false, nullable = false)
 	private String severityName;
 
-	@Column(name="SORT_ORDER")
+	@Column(name="SORT_ORDER", nullable = false)
 	private int sortOrder;
+
+	@Column(name="CREATE_DATE", updatable = false, nullable = false)
+	private Timestamp createDate;
 
 	//bi-directional many-to-one association to Incident
 	@OneToMany(mappedBy="stdSeverity")

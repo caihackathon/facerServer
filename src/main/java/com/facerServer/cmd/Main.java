@@ -18,10 +18,7 @@ public class Main {
 //		ApplicationDao.update(4, "IRIS");
 		
 		System.out.println("=== Applications ===");
-
-    	ApplicationDao dao = new ApplicationDao();
-		
-		List<StdApplication> apps = dao.readAll();
+    	List<StdApplication> apps = ApplicationDao.readAll();
 		if (apps != null) {
 			for (StdApplication app : apps) {
 				System.out.println(app.getApplicationId() 
