@@ -43,17 +43,31 @@ public class Main {
 			}
 		}
 		
-		System.out.println("=== Incidents ===");
-		List<Incident> incidents = IncidentDao.readAll();
-		if (incidents != null) {
-			for (Incident inc : incidents ) {
+		System.out.println("=== Incidents - All ===");
+		List<Incident> incAll = IncidentDao.readAll();
+		if (incAll != null) {
+			for (Incident inc : incAll ) {
 				System.out.println( inc.getIncidentId()
-						+ " - " + inc.getStdIncidentType().getIncidentTypeName()
-						+ " - " + inc.getStdSeverity().getSeverityName() 
-						+ " - " + inc.getIncidentDate().toString()
-//						+ " - " + inc.getIncidentResolvedDate()..toString()
+						+ " - " + inc.getIncidentTypeName()
+						+ " - " + inc.getSeverityName()
+						+ " - " + inc.getIncidentTypeName()
+						+ " - " + inc.getIncidentActive()
 						);
 			}
 		}
+	
+		System.out.println("=== Incidents - Active ===");
+		List<Incident> incActive = IncidentDao.readActive();
+		if (incActive != null) {
+			for (Incident inc : incActive ) {
+				System.out.println( inc.getIncidentId()
+						+ " - " + inc.getIncidentTypeName()
+						+ " - " + inc.getSeverityName()
+						+ " - " + inc.getIncidentTypeName()
+						+ " - " + inc.getIncidentActive()
+						);
+			}
+		}
+
 	}
 }

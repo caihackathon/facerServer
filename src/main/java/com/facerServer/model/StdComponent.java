@@ -15,6 +15,7 @@ import java.util.List;
 @NamedQueries({
 	@NamedQuery(name="StdComponent.find", query="SELECT c FROM StdComponent c")
 ,	@NamedQuery(name="StdComponent.findAll", query="SELECT c FROM StdComponent c ORDER BY c.componentName")
+//,	@NamedQuery(name="StdComponent.findJoin", query="SELECT c, a.applicationName FROM StdComponent c JOIN stdApplication a ORDER BY a.applicationName, c.componentName")
 })
 public class StdComponent implements Serializable {
 	private static final long serialVersionUID = 1L;

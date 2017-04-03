@@ -30,7 +30,7 @@ public class IncidentDao {
 			transaction.begin();
 			
 			// Get a list of Applications
-			incidents = manager.createNamedQuery("Incident.findAll", Incident.class).getResultList();
+			incidents = manager.createNamedQuery("Incident.findActive", Incident.class).getResultList();
 	
 			// Commit the transaction
 			transaction.commit();
@@ -64,7 +64,7 @@ public class IncidentDao {
 			transaction.begin();
 			
 			// Get a list of Applications
-			incidents = manager.createQuery("SELECT a FROM Incident a ", Incident.class).getResultList();
+			incidents = manager.createNamedQuery("Incident.findAll", Incident.class).getResultList();
 	
 			// Commit the transaction
 			transaction.commit();

@@ -11,7 +11,10 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="INCIDENT")
-@NamedQuery(name="Incident.findAll", query="SELECT i FROM Incident i")
+@NamedQueries({
+	@NamedQuery(name="Incident.findAll", query="SELECT i FROM Incident i ORDER BY i.incidentId DESC")
+,	@NamedQuery(name="Incident.findActive", query="SELECT i FROM Incident i WHERE i.incidentResolvedDate IS NULL ORDER BY i.incidentId DESC")
+})
 public class Incident implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -49,56 +52,91 @@ public class Incident implements Serializable {
 		return this.incidentId;
 	}
 
-	public void setIncidentId(int incidentId) {
-		this.incidentId = incidentId;
-	}
-
-	public Timestamp getCreateDate() {
-		return this.createDate;
-	}
-
-	public void setCreateDate(Timestamp createDate) {
-		this.createDate = createDate;
-	}
-
 	public Timestamp getIncidentDate() {
 		return this.incidentDate;
-	}
-
-	public void setIncidentDate(Timestamp incidentDate) {
-		this.incidentDate = incidentDate;
-	}
-
-	public String getIncidentDetail() {
-		return this.incidentDetail;
-	}
-
-	public void setIncidentDetail(String incidentDetail) {
-		this.incidentDetail = incidentDetail;
 	}
 
 	public Timestamp getIncidentResolvedDate() {
 		return this.incidentResolvedDate;
 	}
 
-	public void setIncidentResolvedDate(Timestamp incidentResolvedDate) {
-		this.incidentResolvedDate = incidentResolvedDate;
+	public String getIncidentDetail() {
+		return this.incidentDetail;
 	}
 
+	public String getIncidentActive() {
+		String active = new String();
+		
+		if ( this.incidentResolvedDate != null) {
+			active = "N";
+		} else {
+			active = "Y";
+		};
+
+		return active;
+	}
+	
+	public String getIncidentTypeName() {
+		return this.stdIncidentType.getIncidentTypeName();
+	}
+	
+	public int getSeverityId() {
+		return this.stdSeverity.getSeverityId();
+	}
+	
+	public String getSeverityName() {
+		return this.stdSeverity.getSeverityName();
+	}
+	
+	public String getComponentName() {
+		return  this.stdIncidentType.getStdComponent().getComponentName();
+	}
+	
+	public String getApplicationName() {
+		return this.stdIncidentType.getStdComponent().getStdApplication().getApplicationName();
+	}
+	
+	//	Connectors to Std tables
 	public StdIncidentType getStdIncidentType() {
 		return this.stdIncidentType;
+	}
+
+	public StdSeverity getStdSeverity() {
+		return this.stdSeverity;
+	}
+	
+/*
+	public Timestamp getCreateDate() {
+		return this.createDate;
+	}
+
+	public void setIncidentId(int incidentId) {
+		this.incidentId = incidentId;
+	}
+
+	public void setCreateDate(Timestamp createDate) {
+		this.createDate = createDate;
+	}
+
+	public void setIncidentDate(Timestamp incidentDate) {
+		this.incidentDate = incidentDate;
+	}
+
+	public void setIncidentDetail(String incidentDetail) {
+		this.incidentDetail = incidentDetail;
+	}
+
+	public void setIncidentResolvedDate(Timestamp incidentResolvedDate) {
+		this.incidentResolvedDate = incidentResolvedDate;
 	}
 
 	public void setStdIncidentType(StdIncidentType stdIncidentType) {
 		this.stdIncidentType = stdIncidentType;
 	}
 
-	public StdSeverity getStdSeverity() {
-		return this.stdSeverity;
-	}
-
 	public void setStdSeverity(StdSeverity stdSeverity) {
 		this.stdSeverity = stdSeverity;
 	}
-
+*/
+	
 }
