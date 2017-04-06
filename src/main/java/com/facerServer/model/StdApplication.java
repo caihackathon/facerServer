@@ -2,6 +2,9 @@ package com.facerServer.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -12,9 +15,10 @@ import java.util.List;
  */
 @Entity
 @Table(name="STD_APPLICATION")
+//@JsonPropertyOrder({ "applicationId", "applicationName" })
 @NamedQueries({
-	@NamedQuery(name="StdApplication.find", query="SELECT s FROM StdApplication s")
-,	@NamedQuery(name="StdApplication.findAll", query="SELECT s FROM StdApplication s ORDER BY s.applicationName")
+	@NamedQuery(name="StdApplication.findAll", query="SELECT s FROM StdApplication s ORDER BY s.applicationName")
+,	@NamedQuery(name="StdApplication.findActive", query="SELECT s FROM StdApplication s WHERE s.expireDate IS NULL ORDER BY s.applicationName")
 })
 public class StdApplication implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -35,6 +39,7 @@ public class StdApplication implements Serializable {
 
 	//bi-directional many-to-one association to StdComponent
 	@OneToMany(mappedBy="stdApplication")
+	@JsonIgnore
 	private List<StdComponent> stdComponents;
 
 	public StdApplication() {

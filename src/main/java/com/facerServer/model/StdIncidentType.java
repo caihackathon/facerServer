@@ -2,6 +2,9 @@ package com.facerServer.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -36,6 +39,7 @@ public class StdIncidentType implements Serializable {
 
 	//bi-directional many-to-one association to StdComponent
 	@ManyToOne
+	@JsonIgnore
 	@JoinColumn(name="COMPONENT_ID")
 	private StdComponent stdComponent;
 

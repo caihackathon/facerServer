@@ -2,6 +2,9 @@ package com.facerServer.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.sql.Timestamp;
 
 
@@ -37,11 +40,13 @@ public class Incident implements Serializable {
 
 	//bi-directional many-to-one association to StdIncidentType
 	@ManyToOne
+	@JsonIgnore
 	@JoinColumn(name="INCIDENT_TYPE_ID")
 	private StdIncidentType stdIncidentType;
 
 	//bi-directional many-to-one association to StdSeverity
 	@ManyToOne
+	@JsonIgnore
 	@JoinColumn(name="SEVERITY_ID")
 	private StdSeverity stdSeverity;
 

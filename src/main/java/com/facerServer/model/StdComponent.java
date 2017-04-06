@@ -2,6 +2,9 @@ package com.facerServer.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -13,8 +16,8 @@ import java.util.List;
 @Entity
 @Table(name="STD_COMPONENT")
 @NamedQueries({
-	@NamedQuery(name="StdComponent.find", query="SELECT c FROM StdComponent c")
-,	@NamedQuery(name="StdComponent.findAll", query="SELECT c FROM StdComponent c ORDER BY c.componentName")
+	@NamedQuery(name="StdComponent.findAll", query="SELECT c FROM StdComponent c ORDER BY c.componentName")
+,	@NamedQuery(name="StdComponent.findActive", query="SELECT c FROM StdComponent c WHERE c.expireDate IS NULL ORDER BY c.componentName")
 //,	@NamedQuery(name="StdComponent.findJoin", query="SELECT c, a.applicationName FROM StdComponent c JOIN stdApplication a ORDER BY a.applicationName, c.componentName")
 })
 public class StdComponent implements Serializable {
@@ -36,11 +39,13 @@ public class StdComponent implements Serializable {
 
 	//bi-directional many-to-one association to StdApplication
 	@ManyToOne
+	@JsonIgnore
 	@JoinColumn(name="APPLICATION_ID")
 	private StdApplication stdApplication;
 
 	//bi-directional many-to-one association to StdIncidentType
 	@OneToMany(mappedBy="stdComponent")
+	@JsonIgnore
 	private List<StdIncidentType> stdIncidentTypes;
 
 	public StdComponent() {

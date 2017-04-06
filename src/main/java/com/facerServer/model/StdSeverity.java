@@ -2,6 +2,9 @@ package com.facerServer.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -32,6 +35,7 @@ public class StdSeverity implements Serializable {
 
 	//bi-directional many-to-one association to Incident
 	@OneToMany(mappedBy="stdSeverity")
+	@JsonIgnore
 	private List<Incident> incidents;
 
 	public StdSeverity() {
