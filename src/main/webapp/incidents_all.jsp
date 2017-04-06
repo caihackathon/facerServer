@@ -17,20 +17,24 @@ List<Incident> incidents = IncidentDao.readAll();if (incidents != null) {
 <table border="1" width="300">
 <tr>
 <td>Incident ID</td>
-<td>Incident Type</td>
-<td>Severity</td>
 <td>Application</td>
 <td>Component</td>
+<td>Incident Type</td>
+<td>Severity ID</td>
+<td>Severity</td>
 <td>Incident Date</td>
+<td>Incident Active</td>
 </tr>
 <%	for (Incident inc : incidents) { %>
 <tr>
 <td><%=inc.getIncidentId() %></td>
-<td><%=inc.getStdIncidentType().getIncidentTypeName() %></td>
-<td><%=inc.getStdSeverity().getSeverityName() %></td>
-<td><%=inc.getStdIncidentType().getStdComponent().getStdApplication().getApplicationName() %></td>
-<td><%=inc.getStdIncidentType().getStdComponent().getComponentName() %></td>
+<td><%=inc.getApplicationName() %></td>
+<td><%=inc.getComponentName() %></td>
+<td><%=inc.getIncidentTypeName() %></td>
+<td><%=inc.getSeverityId() %></td>
+<td><%=inc.getSeverityName() %></td>
 <td><%=inc.getIncidentDate().toString() %></td>
+<td><%=inc.getIncidentActive() %></td>
 </tr>
 <%   }
   }

@@ -2,6 +2,9 @@ package com.facerServer.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -18,20 +21,21 @@ public class StdSeverity implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="SEVERITY_ID")
+	@Column(name="SEVERITY_ID", updatable = false, nullable = false)
 	private int severityId;
 
-	@Column(name="CREATE_DATE")
-	private Timestamp createDate;
-
-	@Column(name="SEVERITY_NAME")
+	@Column(name="SEVERITY_NAME", updatable = false, nullable = false)
 	private String severityName;
 
-	@Column(name="SORT_ORDER")
+	@Column(name="SORT_ORDER", nullable = false)
 	private int sortOrder;
+
+	@Column(name="CREATE_DATE", updatable = false, nullable = false)
+	private Timestamp createDate;
 
 	//bi-directional many-to-one association to Incident
 	@OneToMany(mappedBy="stdSeverity")
+	@JsonIgnore
 	private List<Incident> incidents;
 
 	public StdSeverity() {
@@ -41,36 +45,37 @@ public class StdSeverity implements Serializable {
 		return this.severityId;
 	}
 
-	public void setSeverityId(int severityId) {
-		this.severityId = severityId;
-	}
-
-	public Timestamp getCreateDate() {
-		return this.createDate;
-	}
-
-	public void setCreateDate(Timestamp createDate) {
-		this.createDate = createDate;
-	}
-
 	public String getSeverityName() {
 		return this.severityName;
-	}
-
-	public void setSeverityName(String severityName) {
-		this.severityName = severityName;
 	}
 
 	public int getSortOrder() {
 		return this.sortOrder;
 	}
 
-	public void setSortOrder(int sortOrder) {
-		this.sortOrder = sortOrder;
-	}
-
 	public List<Incident> getIncidents() {
 		return this.incidents;
+	}
+	
+/*
+	public Timestamp getCreateDate() {
+		return this.createDate;
+	}
+
+	public void setSeverityId(int severityId) {
+		this.severityId = severityId;
+	}
+
+	public void setCreateDate(Timestamp createDate) {
+		this.createDate = createDate;
+	}
+
+	public void setSeverityName(String severityName) {
+		this.severityName = severityName;
+	}
+
+	public void setSortOrder(int sortOrder) {
+		this.sortOrder = sortOrder;
 	}
 
 	public void setIncidents(List<Incident> incidents) {
@@ -91,4 +96,6 @@ public class StdSeverity implements Serializable {
 		return incident;
 	}
 
+*/
+	
 }

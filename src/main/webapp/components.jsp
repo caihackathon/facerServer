@@ -17,17 +17,17 @@ if (comps != null) {
 <h3>Components</h3>
 <table border="1" width="300">
 <tr>
-<td width="20%"><b>Application ID</b></td>
-<td width="30%"><b>Application Name</b></td>
-<td width="20%"><b>Component ID</b></td>
-<td width="30%"><b>Component Name</b></td>
+<td><b>Application Name</b></td>
+<td><b>Component Name</b></td>
+<td><b>Component Active</b></td>
+<td><b>Component Status</b></td>
 </tr>
 <%	for (StdComponent comp : comps) { %>
 <tr>
-<td><%=comp.getStdApplication().getApplicationId()%></td>
 <td><%=comp.getStdApplication().getApplicationName() %></td>
-<td><%=comp.getComponentId()%></td>
-<td><%=comp.getComponentName()%></td>
+<td><%=comp.getComponentName() %></td>
+<td><%=comp.getComponentActive() %></td>
+<td> </td>
 </tr>
 <%   }
   }

@@ -12,7 +12,76 @@ import com.facerServer.model.StdComponent;
 public class ComponentDao {
 
 	private static final EntityManagerFactory ENTITY_MANAGER_FACTORY = Persistence.createEntityManagerFactory("facerServer");
+	
+	public static List<StdComponent> readAll() {
+		
+		List<StdComponent> comps = null;
+		
+		// Create an EntityManager
+		EntityManager manager = ENTITY_MANAGER_FACTORY.createEntityManager();
+		EntityTransaction transaction = null;
+		
+		try {
+			// Get a transaction
+			transaction = manager.getTransaction();
+			
+			// Begin the transaction
+			transaction.begin();
+			
+			// Get a list of Applications
+			comps = manager.createNamedQuery("StdComponent.findAll", StdComponent.class).getResultList();
+			
+			// Commit the transaction
+			transaction.commit();
+		} catch(Exception ex) {
+			// Roll back the changes
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			// Print the exception
+			ex.printStackTrace();
+		} finally {
+			// Close the EntityManager
+			manager.close();
+		}
+		return comps;
+	}
 
+	public static List<StdComponent> readActive() {
+		
+		List<StdComponent> comps = null;
+		
+		// Create an EntityManager
+		EntityManager manager = ENTITY_MANAGER_FACTORY.createEntityManager();
+		EntityTransaction transaction = null;
+		
+		try {
+			// Get a transaction
+			transaction = manager.getTransaction();
+			
+			// Begin the transaction
+			transaction.begin();
+			
+			// Get a list of Applications
+			comps = manager.createNamedQuery("StdComponent.findActive", StdComponent.class).getResultList();
+			
+			// Commit the transaction
+			transaction.commit();
+		} catch(Exception ex) {
+			// Roll back the changes
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			// Print the exception
+			ex.printStackTrace();
+		} finally {
+			// Close the EntityManager
+			manager.close();
+		}
+		return comps;
+	}
+
+/*
 	public static void create(int id, String name) {
 		
 		// Create an EntityManager
@@ -47,41 +116,6 @@ public class ComponentDao {
 			// Close the EntityManager
 			manager.close();
 		}
-
-	}
-	
-	public static List<StdComponent> readAll() {
-		
-		List<StdComponent> comps = null;
-		
-		// Create an EntityManager
-		EntityManager manager = ENTITY_MANAGER_FACTORY.createEntityManager();
-		EntityTransaction transaction = null;
-		
-		try {
-			// Get a transaction
-			transaction = manager.getTransaction();
-			
-			// Begin the transaction
-			transaction.begin();
-			
-			// Get a list of Applications
-			comps = manager.createQuery("SELECT a FROM StdComponent a", StdComponent.class).getResultList();
-	
-			// Commit the transaction
-			transaction.commit();
-		} catch(Exception ex) {
-			// Roll back the changes
-			if (transaction != null) {
-				transaction.rollback();
-			}
-			// Print the exception
-			ex.printStackTrace();
-		} finally {
-			// Close the EntityManager
-			manager.close();
-		}
-		return comps;
 	}
 
 	public static void delete(int id) {
@@ -157,7 +191,7 @@ public class ComponentDao {
 			// Close the EntityManager
 			manager.close();
 		}
-
 	}
-
+*/
+	
 }

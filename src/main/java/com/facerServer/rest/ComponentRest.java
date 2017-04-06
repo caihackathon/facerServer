@@ -9,27 +9,27 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import com.facerServer.dao.ApplicationDao;
-import com.facerServer.model.StdApplication;
+import com.facerServer.dao.ComponentDao;
+import com.facerServer.model.StdComponent;
 
-@Path("applications")
-public class ApplicationRest {
+@Path("components")
+public class ComponentRest {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAll() throws Exception {    	
-    	List<StdApplication> appList = new ArrayList<StdApplication>();
-    	appList = ApplicationDao.readAll();
-    	return Response.status(200).entity(appList).build();
+    	List<StdComponent> compList = new ArrayList<StdComponent>();
+    	compList = ComponentDao.readAll();
+    	return Response.status(200).entity(compList).build();
     }
 
     @Path("active")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getActive() throws Exception {    	
-    	List<StdApplication> appList = new ArrayList<StdApplication>();
-    	appList = ApplicationDao.readActive();
-    	return Response.status(200).entity(appList).build();
+    	List<StdComponent> compList = new ArrayList<StdComponent>();
+    	compList = ComponentDao.readActive();
+    	return Response.status(200).entity(compList).build();
     }
 
 }
