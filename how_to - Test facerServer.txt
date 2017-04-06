@@ -28,29 +28,27 @@ mvn clean install
  [ copy ./target/facerServer.war %CATALINA_HOME%/webapps ]
  
 # =======================
-# Build 
+# Test
 # =======================
  
 # Standalone Java program
 
 Run /src/main/java/com.facerServer.cmd/Main.java
+
  
-# Verify tomcat
-
-http://localhost:8080/
-
 #Verify .jsp 
 
 http://localhost:8080/facerServer
 (Click on each page)
 
+
 # Verify REST service calls
 
-http://localhost:8080/facerServer/rest/example					(Returns text listing of applications)
+http://localhost:8080/facerServer/rest/applications
+http://localhost:8080/facerServer/rest/applications/active
 
-http://localhost:8080/facerServer/rest/example/html				(Returns html listing of applications)
+http://localhost:8080/facerServer/rest/components
+http://localhost:8080/facerServer/rest/components/active
 
-http://localhost:8080/facerServer/rest/example/list				(Returns List)
-
-http://localhost:8080/facerServer/rest/example/response			(Returns Response with JSON)
-
+http://localhost:8080/facerServer/rest/incidents
+http://localhost:8080/facerServer/rest/incidents/active
