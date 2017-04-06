@@ -2,6 +2,10 @@ package com.facerServer.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -12,19 +16,23 @@ import java.util.List;
  */
 @Entity
 @Table(name="STD_APPLICATION")
-@NamedQuery(name="StdApplication.findAll", query="SELECT s FROM StdApplication s ORDER BY s.applicationName")
+@JsonPropertyOrder({ "applicationId", "applicationName", "applicationActive" })
+@NamedQueries({
+	@NamedQuery(name="StdApplication.findAll", query="SELECT s FROM StdApplication s ORDER BY s.applicationName")
+,	@NamedQuery(name="StdApplication.findActive", query="SELECT s FROM StdApplication s WHERE s.expireDate IS NULL ORDER BY s.applicationName")
+})
 public class StdApplication implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="APPLICATION_ID")
+	@Column(name="APPLICATION_ID", updatable = false, nullable = false)
 	private int applicationId;
 
-	@Column(name="APPLICATION_NAME")
+	@Column(name="APPLICATION_NAME", updatable = false, nullable = false)
 	private String applicationName;
 
-	@Column(name="CREATE_DATE")
+	@Column(name="CREATE_DATE", updatable = false, nullable = false)
 	private Timestamp createDate;
 
 	@Column(name="EXPIRE_DATE")
@@ -32,6 +40,7 @@ public class StdApplication implements Serializable {
 
 	//bi-directional many-to-one association to StdComponent
 	@OneToMany(mappedBy="stdApplication")
+	@JsonIgnore
 	private List<StdComponent> stdComponents;
 
 	public StdApplication() {
@@ -41,36 +50,42 @@ public class StdApplication implements Serializable {
 		return this.applicationId;
 	}
 
-	public void setApplicationId(int applicationId) {
-		this.applicationId = applicationId;
-	}
-
 	public String getApplicationName() {
 		return this.applicationName;
+	}
+
+	public String getApplicationActive() {
+		String active = new String();
+		
+		if ( this.expireDate != null) {
+			active = "N";
+		} else {
+			active = "Y";
+		};
+
+		return active;
+	}
+
+	public List<StdComponent> getStdComponents() {
+		return this.stdComponents;
+	}
+
+	
+/*
+	public void setApplicationId(int applicationId) {
+		this.applicationId = applicationId;
 	}
 
 	public void setApplicationName(String applicationName) {
 		this.applicationName = applicationName;
 	}
 
-	public Timestamp getCreateDate() {
-		return this.createDate;
-	}
-
 	public void setCreateDate(Timestamp createDate) {
 		this.createDate = createDate;
 	}
 
-	public Timestamp getExpireDate() {
-		return this.expireDate;
-	}
-
 	public void setExpireDate(Timestamp expireDate) {
 		this.expireDate = expireDate;
-	}
-
-	public List<StdComponent> getStdComponents() {
-		return this.stdComponents;
 	}
 
 	public void setStdComponents(List<StdComponent> stdComponents) {
@@ -90,5 +105,6 @@ public class StdApplication implements Serializable {
 
 		return stdComponent;
 	}
+*/
 
 }

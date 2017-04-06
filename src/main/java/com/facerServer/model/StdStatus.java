@@ -17,17 +17,17 @@ public class StdStatus implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="STATUS_ID")
+	@Column(name="STATUS_ID", updatable = false, nullable = false)
 	private int statusId;
 
-	@Column(name="CREATE_DATE")
-	private Timestamp createDate;
+	@Column(name="STATUS_NAME", updatable = false, nullable = false)
+	private String statusName;
 
-	@Column(name="SORT_ORDER")
+	@Column(name="SORT_ORDER", nullable = false)
 	private int sortOrder;
 
-	@Column(name="STATUS_NAME")
-	private String statusName;
+	@Column(name="CREATE_DATE", updatable = false, nullable = false)
+	private Timestamp createDate;
 
 	public StdStatus() {
 	}
@@ -36,32 +36,34 @@ public class StdStatus implements Serializable {
 		return this.statusId;
 	}
 
-	public void setStatusId(int statusId) {
-		this.statusId = statusId;
-	}
-
-	public Timestamp getCreateDate() {
-		return this.createDate;
-	}
-
-	public void setCreateDate(Timestamp createDate) {
-		this.createDate = createDate;
+	public String getStatusName() {
+		return this.statusName;
 	}
 
 	public int getSortOrder() {
 		return this.sortOrder;
 	}
 
-	public void setSortOrder(int sortOrder) {
-		this.sortOrder = sortOrder;
+/*
+	public Timestamp getCreateDate() {
+		return this.createDate;
 	}
 
-	public String getStatusName() {
-		return this.statusName;
+	public void setStatusId(int statusId) {
+		this.statusId = statusId;
+	}
+
+	public void setCreateDate(Timestamp createDate) {
+		this.createDate = createDate;
+	}
+
+	public void setSortOrder(int sortOrder) {
+		this.sortOrder = sortOrder;
 	}
 
 	public void setStatusName(String statusName) {
 		this.statusName = statusName;
 	}
-
+*/
+	
 }

@@ -2,6 +2,9 @@ package com.facerServer.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -18,17 +21,17 @@ public class StdIncidentType implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="INCIDENT_TYPE_ID")
+	@Column(name="INCIDENT_TYPE_ID", updatable = false, nullable = false)
 	private int incidentTypeId;
 
-	@Column(name="APPEND_NEW_EVENTS_FLG")
+	@Column(name="INCIDENT_TYPE_NAME", updatable = false, nullable = false)
+	private String incidentTypeName;
+
+	@Column(name="APPEND_NEW_EVENTS_FLG", nullable = false)
 	private String appendNewEventsFlg;
 
-	@Column(name="CREATE_DATE")
+	@Column(name="CREATE_DATE", updatable = false, nullable = false)
 	private Timestamp createDate;
-
-	@Column(name="INCIDENT_TYPE_NAME")
-	private String incidentTypeName;
 
 	//bi-directional many-to-one association to Incident
 	@OneToMany(mappedBy="stdIncidentType")
@@ -36,6 +39,7 @@ public class StdIncidentType implements Serializable {
 
 	//bi-directional many-to-one association to StdComponent
 	@ManyToOne
+	@JsonIgnore
 	@JoinColumn(name="COMPONENT_ID")
 	private StdComponent stdComponent;
 
@@ -46,36 +50,42 @@ public class StdIncidentType implements Serializable {
 		return this.incidentTypeId;
 	}
 
-	public void setIncidentTypeId(int incidentTypeId) {
-		this.incidentTypeId = incidentTypeId;
+	public String getIncidentTypeName() {
+		return this.incidentTypeName;
 	}
 
 	public String getAppendNewEventsFlg() {
 		return this.appendNewEventsFlg;
 	}
 
-	public void setAppendNewEventsFlg(String appendNewEventsFlg) {
-		this.appendNewEventsFlg = appendNewEventsFlg;
+	public List<Incident> getIncidents() {
+		return this.incidents;
 	}
 
+	public StdComponent getStdComponent() {
+		return this.stdComponent;
+	}
+
+
+/*
 	public Timestamp getCreateDate() {
 		return this.createDate;
+	}
+
+	public void setIncidentTypeId(int incidentTypeId) {
+		this.incidentTypeId = incidentTypeId;
+	}
+
+	public void setAppendNewEventsFlg(String appendNewEventsFlg) {
+		this.appendNewEventsFlg = appendNewEventsFlg;
 	}
 
 	public void setCreateDate(Timestamp createDate) {
 		this.createDate = createDate;
 	}
 
-	public String getIncidentTypeName() {
-		return this.incidentTypeName;
-	}
-
 	public void setIncidentTypeName(String incidentTypeName) {
 		this.incidentTypeName = incidentTypeName;
-	}
-
-	public List<Incident> getIncidents() {
-		return this.incidents;
 	}
 
 	public void setIncidents(List<Incident> incidents) {
@@ -96,12 +106,9 @@ public class StdIncidentType implements Serializable {
 		return incident;
 	}
 
-	public StdComponent getStdComponent() {
-		return this.stdComponent;
-	}
-
 	public void setStdComponent(StdComponent stdComponent) {
 		this.stdComponent = stdComponent;
 	}
+*/
 
 }
