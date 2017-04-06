@@ -4,6 +4,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.List;
  */
 @Entity
 @Table(name="STD_APPLICATION")
-//@JsonPropertyOrder({ "applicationId", "applicationName" })
+@JsonPropertyOrder({ "applicationId", "applicationName", "applicationActive" })
 @NamedQueries({
 	@NamedQuery(name="StdApplication.findAll", query="SELECT s FROM StdApplication s ORDER BY s.applicationName")
 ,	@NamedQuery(name="StdApplication.findActive", query="SELECT s FROM StdApplication s WHERE s.expireDate IS NULL ORDER BY s.applicationName")

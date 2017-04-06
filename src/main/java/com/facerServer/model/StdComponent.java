@@ -4,6 +4,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.List;
  */
 @Entity
 @Table(name="STD_COMPONENT")
+@JsonPropertyOrder({ "componentId", "componentName", "componentActive" })
 @NamedQueries({
 	@NamedQuery(name="StdComponent.findAll", query="SELECT c FROM StdComponent c ORDER BY c.componentName")
 ,	@NamedQuery(name="StdComponent.findActive", query="SELECT c FROM StdComponent c WHERE c.expireDate IS NULL ORDER BY c.componentName")

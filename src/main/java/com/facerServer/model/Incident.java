@@ -4,6 +4,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import java.sql.Timestamp;
 
@@ -14,6 +15,9 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="INCIDENT")
+@JsonPropertyOrder({ "incidentId", "incidentTypeName", "applicationName", "componentName"
+	, "incidentDate", "incidentResolvedDate", "incidentActive"
+	, "severityId", "severityName", "incidentDetail" })
 @NamedQueries({
 	@NamedQuery(name="Incident.findAll", query="SELECT i FROM Incident i ORDER BY i.incidentId DESC")
 ,	@NamedQuery(name="Incident.findActive", query="SELECT i FROM Incident i WHERE i.incidentResolvedDate IS NULL ORDER BY i.incidentId DESC")
@@ -57,12 +61,16 @@ public class Incident implements Serializable {
 		return this.incidentId;
 	}
 
-	public Timestamp getIncidentDate() {
-		return this.incidentDate;
+	public String getIncidentDate() {
+		return this.incidentDate.toString();
 	}
 
-	public Timestamp getIncidentResolvedDate() {
-		return this.incidentResolvedDate;
+	public String getIncidentResolvedDate() {
+		if ( this.incidentResolvedDate == null) {
+			return "";
+		} else {
+			return this.incidentResolvedDate.toString();	
+		}
 	}
 
 	public String getIncidentDetail() {

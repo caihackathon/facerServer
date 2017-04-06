@@ -85,7 +85,9 @@
 	  		<version>${version.jersey}</version>
 	  	</dependency>
 
+
 		<!-- Jackson -->
+<!-- 
 	  	<dependency>
 	  		<groupId>com.fasterxml.jackson.jaxrs</groupId>
 	  		<artifactId>jackson-jaxrs-json-provider</artifactId>
@@ -106,6 +108,7 @@
 	  		<artifactId>jackson-databind</artifactId>
 	  		<version>${version.jackson}</version>
 	  	</dependency>
+ -->
 	  	
     </dependencies>
     

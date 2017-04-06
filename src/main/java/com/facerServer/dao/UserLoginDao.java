@@ -7,15 +7,15 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-import com.facerServer.model.Incident;
+import com.facerServer.model.UserLogin;
 
-public class IncidentDao {
+public class UserLoginDao {
 
 	private static final EntityManagerFactory ENTITY_MANAGER_FACTORY = Persistence.createEntityManagerFactory("facerServer");
 
-	public static List<Incident> readAll() {
+	public static List<UserLogin> readByUserId() {
 		
-		List<Incident> incidents = null;
+		List<UserLogin> users = null;
 		
 		// Create an EntityManager
 		EntityManager manager = ENTITY_MANAGER_FACTORY.createEntityManager();
@@ -29,7 +29,7 @@ public class IncidentDao {
 			transaction.begin();
 			
 			// Get a list of Applications
-			incidents = manager.createNamedQuery("Incident.findAll", Incident.class).getResultList();
+			users = manager.createNamedQuery("UserLogin.findByUserId", UserLogin.class).getResultList();
 	
 			// Commit the transaction
 			transaction.commit();
@@ -44,12 +44,12 @@ public class IncidentDao {
 			// Close the EntityManager
 			manager.close();
 		}
-		return incidents;
+		return users;
 	}
 
-	public static List<Incident> readActive() {
+	public static List<UserLogin> readByLastName() {
 		
-		List<Incident> incidents = null;
+		List<UserLogin> users = null;
 		
 		// Create an EntityManager
 		EntityManager manager = ENTITY_MANAGER_FACTORY.createEntityManager();
@@ -63,7 +63,7 @@ public class IncidentDao {
 			transaction.begin();
 			
 			// Get a list of Applications
-			incidents = manager.createNamedQuery("Incident.findActive", Incident.class).getResultList();
+			users = manager.createNamedQuery("UserLogin.findbyLastName", UserLogin.class).getResultList();
 	
 			// Commit the transaction
 			transaction.commit();
@@ -78,7 +78,7 @@ public class IncidentDao {
 			// Close the EntityManager
 			manager.close();
 		}
-		return incidents;
+		return users;
 	}
 
 	/*

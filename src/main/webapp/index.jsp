@@ -14,5 +14,7 @@
 <a href="components.jsp">Components</a>
 <br>
 Incidents - <a href="incidents_all.jsp">All</a> - <a href="incidents_active.jsp">Active</a>
+<br>
+Users - <a href="users_by_userid.jsp">By UserId</a> - <a href="users_by_lastname.jsp">By Last Name</a>
 </body>
 </html>
