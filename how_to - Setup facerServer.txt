@@ -16,6 +16,25 @@ Maven
 - Added to PATH - (maven dir)/bin
 
 
+Eclipse (Neon) - 64-bit
+- Install - IDE for Java EE Development
+- Run
+- Help > Eclipse Marketplace
+	Check for the following (may take a few minutes to update):
+		Web Tools:
+		- Eclipse Java EE Developer Tools
+		- Eclipse Web Developer Tools
+		- Eclipse XML Editors and Tools
+		- HTML Editor
+		Maven:
+		- Maven (Java EE) Integration for Eclipse WTP (Luna/Mars)
+		- Maven Integration for Eclipse WTP (Juno)
+
+	Optionally, install the following:
+		CVS Integration
+		Subversive - SVN Team Provider
+	
+
 # Verify pre-reqs
 Open command-line window:
 
@@ -42,7 +61,7 @@ Open command-line window:
 	Shows version of Java installed
 
 # =============================================
-# Create Maven Project
+# Create Maven Project (or download existing project from GitHub)
 # =============================================
 
 # Start in Eclipse workspace
