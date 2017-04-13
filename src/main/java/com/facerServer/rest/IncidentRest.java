@@ -9,27 +9,27 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import com.facerServer.dao.UserLoginDao;
-import com.facerServer.model.UserLogin;
+import com.facerServer.dao.IncidentDao;
+import com.facerServer.model.Incident;
 
-@Path("users")
+@Path("incidents")
 public class IncidentRest {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getByUserId() throws Exception {    	
-    	List<UserLogin> userList = new ArrayList<UserLogin>();
-    	userList = UserLoginDao.readByUserId();
-    	return Response.status(200).entity(userList).build();
+    public Response getAll() throws Exception {    	
+    	List<Incident> incidentList = new ArrayList<Incident>();
+    	incidentList = IncidentDao.readAll();
+    	return Response.status(200).entity(incidentList).build();
     }
 
-    @Path("name")
+    @Path("active")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getActive() throws Exception {    	
-    	List<UserLogin> userList = new ArrayList<UserLogin>();
-    	userList = UserLoginDao.readByLastName();
-    	return Response.status(200).entity(userList).build();
+    	List<Incident> incidentList = new ArrayList<Incident>();
+    	incidentList = IncidentDao.readActive();
+    	return Response.status(200).entity(incidentList).build();
     }
 
 }
