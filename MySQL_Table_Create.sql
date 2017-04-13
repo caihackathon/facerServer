@@ -68,6 +68,8 @@ UNION SELECT 'IRIS';
 
 commit;
 
+GRANT SELECT ON `facer`.`STD_APPLICATION` TO 'facerServer_user'@'dr21apl53.cityofchicago.org';
+
 -- SELECT * FROM STD_APPLICATION;
 
 -- =========================
@@ -124,6 +126,8 @@ UNION SELECT ( SELECT APPLICATION_ID FROM STD_APPLICATION WHERE APPLICATION_NAME
 
 commit;
 
+GRANT SELECT ON `facer`.`STD_COMPONENT` TO 'facerServer_user'@'dr21apl53.cityofchicago.org';
+
 -- SELECT * FROM STD_COMPONENT;
 
 -- =========================
@@ -145,6 +149,8 @@ UNION SELECT 'RED', 2;
 
 commit;
 
+GRANT SELECT ON `facer`.`STD_STATUS` TO 'facerServer_user'@'dr21apl53.cityofchicago.org';
+
 -- SELECT * FROM STD_APPLICATION_STATUS;
 
 -- =========================
@@ -165,6 +171,8 @@ UNION SELECT 'MEDIUM', 1
 UNION SELECT 'SEVERE', 2;
 
 commit;
+
+GRANT SELECT ON `facer`.`STD_SEVERITY` TO 'facerServer_user'@'dr21apl53.cityofchicago.org';
 
 -- SELECT * FROM STD_SEVERITY;
 
@@ -214,6 +222,8 @@ WHERE sc.APPLICATION_ID = sa.APPLICATION_ID
   AND sc.COMPONENT_NAME = sa.APPLICATION_NAME;
 
 commit;
+
+GRANT SELECT ON `facer`.`STD_INCIDENT_TYPE` TO 'facerServer_user'@'dr21apl53.cityofchicago.org';
 
 /*
 -- =========================
@@ -285,8 +295,9 @@ UNION SELECT 'DeAnthony_McKenzie@compaid.com', 'DeAnthony', 'McKenzie', SHA2('pa
 UNION SELECT 'Joseph_Wroblewski@compaid.com', 'Joe', 'Wroblewski', SHA2('password', 256), SHA2('token', 256)
 ;
 
-
 commit;
+
+GRANT SELECT, INSERT, UPDATE, DELETE ON `facer`.`USER_LOGIN` TO 'facerServer_user'@'dr21apl53.cityofchicago.org';
 
 -- SELECT * FROM USER_LOGIN;
 
@@ -397,6 +408,8 @@ WHERE sit.COMPONENT_ID = sc.COMPONENT_ID
 ;
 
 commit;
+
+GRANT SELECT, INSERT, UPDATE, DELETE ON `facer`.`INCIDENT` TO 'facerServer_user'@'dr21apl53.cityofchicago.org';
 
 -- Clear all incidents
 /*
